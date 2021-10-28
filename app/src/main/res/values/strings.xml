@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Мероприятия ИрНИТУ</string>
+    <string name="description">Описание</string>
+    <string name="descriptionText">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
+    <string name="titleText">Очень длинное название мероприятия</string>
+    <string name="dateEvent">29.04.2021</string>
+    <string name="isAvailable">06.05.2021</string>
+
+
+</resources>
