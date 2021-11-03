@@ -1,4 +1,4 @@
-package com.example.eventslook;
+package com.example.eventslook.model;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 

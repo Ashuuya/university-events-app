@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
+import com.example.eventslook.model.Datalist;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -32,8 +33,7 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<String> {
             Response response = client.newCall(request).execute();
             result = response.body().string();
 
-
-
+            Log.d("test", result);
         } catch (IOException e) {
             result = "No Internet";
             e.printStackTrace();

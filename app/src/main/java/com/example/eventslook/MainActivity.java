@@ -14,19 +14,20 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.eventslook.model.Data;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import static com.example.eventslook.Consts.URL_GET_EVENTS;
+import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity {
     TextView isAvailable, dateEvent, title, description, descText;
@@ -43,15 +44,28 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         progressBar.animate();
 
-
-
-        LoaderManager.getInstance(this).initLoader(1, null, new MyLoaderCallback());
-
+        Loader<String> stringLoader = LoaderManager.getInstance(this).initLoader(1, null, new MyLoaderCallback());
+        stringLoader.forceLoad();
 
 //        initData();
         rv = findViewById(R.id.rv);
-        EventAdapter eventAdapter = new EventAdapter(this, events);
         rv.setLayoutManager(new LinearLayoutManager(this));
+
+        Log.d("teststring", stringLoader.toString());
+
+//        try (FileReader reader = new FileReader(String.valueOf(stringLoader))){
+//            JsonParser parser = new JsonParser();
+////            JSONArray jsonArray = new JSONArray(stringLoader);
+//            JsonElement obj = parser.parse(reader);
+//            obj.
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        EventAdapter eventAdapter = new EventAdapter(this, events);
         rv.setAdapter(eventAdapter);
         eventAdapter.notifyDataSetChanged();
     }
@@ -65,16 +79,30 @@ public class MainActivity extends AppCompatActivity {
             return new MyAsyncTaskLoader(MainActivity.this);
         }
 
+
         @Override
         public void onLoadFinished(@NonNull @NotNull Loader<String> loader, String data) {
+            Log.d("recieveid", data);
+
             Gson gson = new Gson();
-            Data obj = gson.fromJson(data, Data.class);
+            Type collectionType = new TypeToken<Collection<Data>>(){}.getType();
+            Collection<Data> eventslist = gson.fromJson(data, collectionType);
+//            Datalist eventslist = gson.fromJson(data, Datalist.class);
+            Log.d("test", ""+eventslist.toString());
+
+
+//            String json = "[{\"\":\"\"},..., {\"\":\"\"}]";
+//            Datalist eventslist = gson.fromJson(json, new TypeToken<Datalist>() {}.getType());
+//            Datalist objlist = gson.fromJson(data, Datalist.class);
+//            System.out.println(objlist.toString());
+
+
 //            Data newObj = null;
 //            newObj.setFullname(obj.getFullname());
 //            newObj.setDescription(obj.getDescription());
 //            newObj.setEnddate(obj.getEnddate());
 //            newObj.setStartdate(obj.getStartdate());
-            events.add(new Data(obj.getCourseId(),obj.getFullname(), obj.getCategory(), obj.getStartdate(), obj.getEnddate(), obj.getDescription(), obj.getImage(), obj.getOrganizers()));
+//            events.add(new Data(obj.getCourseId(),obj.getFullname(), obj.getCategory(), obj.getStartdate(), obj.getEnddate(), obj.getDescription(), obj.getImage(), obj.getOrganizers()));
             progressBar.setVisibility(View.INVISIBLE);
         }
 
