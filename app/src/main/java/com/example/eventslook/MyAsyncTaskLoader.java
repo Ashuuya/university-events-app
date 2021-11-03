@@ -33,6 +33,7 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<String> {
             Response response = client.newCall(request).execute();
             result = response.body().string();
 
+
             Log.d("test", result);
         } catch (IOException e) {
             result = "No Internet";

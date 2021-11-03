@@ -15,16 +15,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.eventslook.model.Data;
+import com.example.eventslook.model.Datalist;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,12 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         Loader<String> stringLoader = LoaderManager.getInstance(this).initLoader(1, null, new MyLoaderCallback());
         stringLoader.forceLoad();
+//        Log.d("teststring", stringLoader.toString());
 
 //        initData();
         rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
-        Log.d("teststring", stringLoader.toString());
 
 //        try (FileReader reader = new FileReader(String.valueOf(stringLoader))){
 //            JsonParser parser = new JsonParser();
@@ -82,13 +77,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onLoadFinished(@NonNull @NotNull Loader<String> loader, String data) {
-            Log.d("recieveid", data);
+//            Log.d("recieveid", data);
 
             Gson gson = new Gson();
             Type collectionType = new TypeToken<Collection<Data>>(){}.getType();
             Collection<Data> eventslist = gson.fromJson(data, collectionType);
 //            Datalist eventslist = gson.fromJson(data, Datalist.class);
-            Log.d("test", ""+eventslist.toString());
+//            Datalist newlist = eventslist.forEach();
+            Log.d("testviewobj", ""+eventslist.toString());
 
 
 //            String json = "[{\"\":\"\"},..., {\"\":\"\"}]";
