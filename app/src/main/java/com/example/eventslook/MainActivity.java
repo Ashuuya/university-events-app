@@ -17,20 +17,26 @@ import android.widget.TextView;
 import com.example.eventslook.model.Data;
 import com.example.eventslook.model.Datalist;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     TextView isAvailable, dateEvent, title, description, descText;
 
 
     private RecyclerView rv;
-    private ArrayList<Data> events = new ArrayList<>();
+    private List<Data> events = new ArrayList<>();
     ProgressBar progressBar;
 
     @Override
@@ -77,14 +83,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onLoadFinished(@NonNull @NotNull Loader<String> loader, String data) {
-//            Log.d("recieveid", data);
+            Log.d("recieveid", data);
 
             Gson gson = new Gson();
-            Type collectionType = new TypeToken<Collection<Data>>(){}.getType();
-            Collection<Data> eventslist = gson.fromJson(data, collectionType);
-//            Datalist eventslist = gson.fromJson(data, Datalist.class);
-//            Datalist newlist = eventslist.forEach();
-            Log.d("testviewobj", ""+eventslist.toString());
+            Type collectionType = new TypeToken<List<Data>>(){}.getType();
+            Datalist newlist = new Datalist();
+            newlist.setEvents(gson.fromJson(data, collectionType));
+            for(int counter = 0; counter <= (newlist.getSize() - 1); counter++){
+                Data localevent = newlist.getEvents().get(counter);
+                events.add(new Data(localevent.getCourseId(),localevent.getFullname(), localevent.getCategory(), localevent.getStartdate(), localevent.getEnddate(), localevent.getDescription(), localevent.getImage(), localevent.getOrganizers()));
+                Log.d("elementaddingtest", (newlist.getEvents().get(counter).getOrganizers()));
+            }
+
+
+//            for(collectionType client : clientArray) {
+//                System.out.println(client.company_name);
+//            Data obj = gson.fromJson(eventslist, Data.class);
+//            Log.d("testviewobj", ""+eventslist.toString());
 
 
 //            String json = "[{\"\":\"\"},..., {\"\":\"\"}]";
@@ -98,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 //            newObj.setDescription(obj.getDescription());
 //            newObj.setEnddate(obj.getEnddate());
 //            newObj.setStartdate(obj.getStartdate());
-//            events.add(new Data(obj.getCourseId(),obj.getFullname(), obj.getCategory(), obj.getStartdate(), obj.getEnddate(), obj.getDescription(), obj.getImage(), obj.getOrganizers()));
+
             progressBar.setVisibility(View.INVISIBLE);
         }
 
