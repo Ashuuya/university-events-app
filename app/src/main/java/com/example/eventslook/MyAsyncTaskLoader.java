@@ -7,9 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
-import com.example.eventslook.model.Datalist;
-import com.google.gson.Gson;
-
 import java.io.IOException;
 
 import okhttp3.OkHttpClient;
@@ -27,7 +24,7 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<String> {
     public String loadInBackground() {
         Request request = new Request.Builder().url(URL_GET_EVENTS).build();
 
-        String result = "";
+        String result;
         OkHttpClient client = new OkHttpClient();
         try {
             Response response = client.newCall(request).execute();
