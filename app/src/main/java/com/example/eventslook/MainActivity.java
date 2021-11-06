@@ -68,17 +68,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onLoadFinished(@NonNull @NotNull Loader<String> loader, String data) {
 
-            Log.d("recieveid", data);
+//            Log.d("recieveid", data);
 
             Gson gson = new Gson();
             Type collectionType = new TypeToken<List<Data>>(){}.getType();
             Datalist newlist = new Datalist();
             newlist.setEvents(gson.fromJson(data, collectionType));
-            for(int counter = 0; counter < newlist.getSize(); counter++){
-                Data localevent = newlist.getEvents().get(counter);
-                events.add(new Data(localevent.getCourseId(),localevent.getFullname(), localevent.getCategory(), localevent.getStartdate(), localevent.getEnddate(), localevent.getDescription(), localevent.getImage(), localevent.getOrganizers()));
-                Log.d("elementaddingtest", (newlist.getEvents().get(counter).getOrganizers()));
-            }
+//            for(int counter = 0; counter < newlist.getSize(); counter++){
+//                Data localevent = newlist.getEvents().get(counter);
+//                events.add(new Data(localevent.getCourseId(),localevent.getFullname(), localevent.getCategory(), localevent.getStartdate(), localevent.getEnddate(), localevent.getDescription(), localevent.getImage(), localevent.getOrganizers()));
+//                Log.d("elementaddingtest", (newlist.getEvents().get(counter).getEnddate()));
+//            }
+            EventAdapter eventAdapter = new EventAdapter(MainActivity.this, events);
+            events = eventAdapter.refreshList(newlist);
+//            eventAdapter.notifyDataSetChanged();
             progressBar.setVisibility(View.INVISIBLE);
         }
 
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         for(int counter = 0; counter <= (newlist.getSize() - 1); counter++){
             Data localevent = newlist.getEvents().get(counter);
             events.add(new Data(localevent.getCourseId(),localevent.getFullname(), localevent.getCategory(), localevent.getStartdate(), localevent.getEnddate(), localevent.getDescription(), localevent.getImage(), localevent.getOrganizers()));
-            Log.d("elementaddingtest", (newlist.getEvents().get(counter).getOrganizers()));
+            Log.d("elementaddingtest", (newlist.getEvents().get(counter).getEnddate()));
         }
     }
 

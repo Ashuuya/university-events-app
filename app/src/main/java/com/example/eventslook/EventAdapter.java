@@ -1,6 +1,7 @@
 package com.example.eventslook;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventslook.model.Data;
+import com.example.eventslook.model.Datalist;
 
 import java.util.List;
 
@@ -56,6 +58,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
 
         }
+    }
+
+    public List<Data> refreshList(Datalist eventList){
+        for(int counter = 0; counter < eventList.getSize(); counter++){
+            Data localevent = eventList.getEvents().get(counter);
+            events.add(new Data(localevent.getCourseId(),localevent.getFullname(), localevent.getCategory(), localevent.getStartdate(), localevent.getEnddate(), localevent.getDescription(), localevent.getImage(), localevent.getOrganizers()));
+            Log.d("elementaddingtest", (eventList.getEvents().get(counter).getEnddate()));
+        }
+        notifyDataSetChanged();
+        return events;
     }
 
 }
