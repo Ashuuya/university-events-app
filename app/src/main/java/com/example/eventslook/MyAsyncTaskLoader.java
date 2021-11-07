@@ -31,7 +31,7 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<String> {
             result = response.body().string();
 
 
-            Log.d("test", result);
+//            Log.d("test", result);
         } catch (IOException e) {
             result = "No Internet";
             e.printStackTrace();

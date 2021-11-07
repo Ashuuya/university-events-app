@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventslook.model.Data;
-import com.example.eventslook.model.Datalist;
 
 import java.util.List;
 
@@ -55,19 +54,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             title = view.findViewById(R.id.title);
             description = view.findViewById(R.id.description);
             descText = view.findViewById(R.id.descText);
-
-
         }
     }
 
-    public List<Data> refreshList(Datalist eventList){
-        for(int counter = 0; counter < eventList.getSize(); counter++){
-            Data localevent = eventList.getEvents().get(counter);
-            events.add(new Data(localevent.getCourseId(),localevent.getFullname(), localevent.getCategory(), localevent.getStartdate(), localevent.getEnddate(), localevent.getDescription(), localevent.getImage(), localevent.getOrganizers()));
-            Log.d("elementaddingtest", (eventList.getEvents().get(counter).getEnddate()));
-        }
+    public void refreshList(){
         notifyDataSetChanged();
-        return events;
     }
 
 }

@@ -8,9 +8,10 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv"
+        app:barrierMargin="10dp"
         tools:ignore="MissingConstraints" />
 
     <ProgressBar

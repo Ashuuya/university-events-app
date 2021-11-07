@@ -1,30 +1,18 @@
 package com.example.eventslook.model;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
+import android.annotation.SuppressLint;
+import android.text.Html;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import static java.lang.Integer.parseInt;
+import static java.lang.System.currentTimeMillis;
 
 public class Data {
 
-    private String course_id;
-
-    private String fullname;
-
-    private String category;
-
-    private String startdate;
-
-    private String enddate;
-
-    private String description;
-
-    private String image;
-
-    private String organizers;
-
+    private String course_id, fullname, category, startdate, enddate, description, image, organizers;
 
     public Data(String course_id, String fullname, String category, String startdate, String enddate, String description, String image, String organizers){
-
         this.course_id = course_id;
         this.fullname = fullname;
         this.category = category;
@@ -61,7 +49,10 @@ public class Data {
     }
 
     public String getStartdate() {
-        return convertToNormalTime(startdate);
+            return convertToNormalTime(startdate);
+    }
+    public String getStartStamp() {
+        return startdate;
     }
 
     public void setStartdate(String startdate) {
@@ -69,7 +60,15 @@ public class Data {
     }
 
     public String getEnddate() {
-        return convertToNormalTime(enddate);
+        if (parseInt(enddate) - getCurrentTime() < 0){
+            return "Мероприятие окончено.";
+        }
+        else{
+            return convertToNormalTime(("Конец: "+ enddate));
+        }
+    }
+    public String getEndStamp() {
+        return enddate;
     }
 
     public void setEnddate(String enddate) {
@@ -77,7 +76,7 @@ public class Data {
     }
 
     public String getDescription() {
-        return description;
+        return Html.fromHtml(description).toString();
     }
 
     public void setDescription(String description) {
@@ -100,14 +99,27 @@ public class Data {
         this.organizers = organizers;
     }
 
-    public String convertToNormalTime(String date){
+    @SuppressLint("SimpleDateFormat")
+    public String convertToNormalTime(String timestamp){
+        String date;
+        try {
+            date = new java.text.SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date (Long.parseLong(timestamp)*1000));
+            return date;
+        }catch (NumberFormatException e){
+            Long epoch = null;
+            try {
+                epoch = (new SimpleDateFormat("MM/dd/yyyy").parse(timestamp).getTime() / 1000);
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+            date = epoch.toString();
 
-        date = Integer.toString(parseInt(date)*1000);
-        Date currentDate = new Date (parseInt(date));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String normalDate = dateFormat.format(currentDate);
+            return date;
+        }
+    }
 
-        return normalDate;
+    public Long getCurrentTime(){
+        return currentTimeMillis();
     }
 }
 
