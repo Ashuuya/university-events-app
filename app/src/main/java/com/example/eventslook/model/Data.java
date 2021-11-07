@@ -76,7 +76,13 @@ public class Data {
     }
 
     public String getDescription() {
-        return Html.fromHtml(description).toString();
+        if(description.isEmpty())
+        {
+            return "Описание отсутствует.";
+        }
+        else {
+            return Html.fromHtml(description).toString();
+        }
     }
 
     public void setDescription(String description) {
@@ -103,12 +109,12 @@ public class Data {
     public String convertToNormalTime(String timestamp){
         String date;
         try {
-            date = new java.text.SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date (Long.parseLong(timestamp)*1000));
+            date = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date (Long.parseLong(timestamp)*1000));
             return date;
         }catch (NumberFormatException e){
             Long epoch = null;
             try {
-                epoch = (new SimpleDateFormat("MM/dd/yyyy").parse(timestamp).getTime() / 1000);
+                epoch = (new SimpleDateFormat("dd/MM/yyyy").parse(timestamp).getTime() / 1000);
             } catch (ParseException parseException) {
                 parseException.printStackTrace();
             }

@@ -29,7 +29,7 @@
         android:layout_below="@id/dateEvent"
         android:layout_marginTop="15dp"
         android:text="@string/titleText"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -52,11 +52,30 @@
         android:text="@string/descriptionText"
         android:textStyle="italic" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descText"
+        android:layout_marginTop="6dp"
+        android:text="@string/organizer"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/orgText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/organizerText" />
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="177dp"
         android:background="?android:attr/listDivider" />
 

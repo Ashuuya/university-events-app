@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             for(int counter = 0; counter < newlist.getSize(); counter++){
                 Data localevent = newlist.getEvents().get(counter);
                 events.add(new Data(localevent.getCourseId(),localevent.getFullname(), localevent.getCategory(), localevent.getStartStamp(), localevent.getEndStamp(), localevent.getDescription(), localevent.getImage(), localevent.getOrganizers()));
-                Log.d("elementaddingtest", (newlist.getEvents().get(counter).getEnddate()));
+                Log.d("desctest", (newlist.getEvents().get(counter).getDescription()));
             }
             eventAdapter.refreshList();
             eventAdapter.notifyDataSetChanged();

@@ -5,6 +5,6 @@
     <string name="titleText">Очень длинное название мероприятия</string>
     <string name="dateEvent">29.04.2021</string>
     <string name="isAvailable">06.05.2021</string>
-
-
+    <string name="organizer">Организаторы:</string>
+    <string name="organizerText">Очень много людей, а может и немного, я не знаю</string>
 </resources>

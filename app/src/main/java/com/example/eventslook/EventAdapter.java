@@ -37,6 +37,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.dateEvent.setText(event.getStartdate());
         holder.title.setText(event.getFullname());
         holder.descText.setText(event.getDescription());
+        holder.orgText.setText(event.getOrganizers());
     }
 
     @Override
@@ -46,7 +47,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView isAvailable, dateEvent, title, description, descText;
+        TextView isAvailable, dateEvent, title, description, descText, orgText;
         public ViewHolder(View view) {
             super(view);
             isAvailable = view.findViewById(R.id.isAvailable);
@@ -54,6 +55,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             title = view.findViewById(R.id.title);
             description = view.findViewById(R.id.description);
             descText = view.findViewById(R.id.descText);
+            orgText = view.findViewById(R.id.orgText);
         }
     }
 
